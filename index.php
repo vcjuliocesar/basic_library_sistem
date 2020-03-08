@@ -1,8 +1,4 @@
 <?php
 require 'core/bootstrap.php';
-
-//$db=require 'config.php';
-
-
-
-//echo "<pre>"; var_dump($db); echo "</pre>";
+$router = new Router;
+Router::load('routes.php')->direct(Request::url(),Request::method());

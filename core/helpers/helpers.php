@@ -5,7 +5,7 @@ if(!function_exists('view')){
   function view($name, $data = []) {
     extract($data);
 
-    return require "views/{$dane}.view.php";
+    return require "views/{$name}.view.php";
   }
 }
 
