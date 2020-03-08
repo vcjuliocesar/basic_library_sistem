@@ -12,7 +12,9 @@ require 'core/database/QueryBuilder.php';
 
 require 'core/Router.php';
 
-require 'controllers/HomePageController.php';
+require 'app/controllers/HomePageController.php';
+
+use App\Core\App;
 
 App::bind('config',require 'config.php');
 
