@@ -12,7 +12,7 @@ class QueryBuilder
 
   public function selectAll($table)
   {
-    $statement = $this->pdo->prepare("select * from {$tabe}");
+    $statement = $this->pdo->prepare("select * from {$table}");
 
     $statement->execute();
 
@@ -34,6 +34,5 @@ class QueryBuilder
     } catch (\Exception $e) {
       die("Woops, something went wrong". $e->getMessage());
     }
-
   }
 }
