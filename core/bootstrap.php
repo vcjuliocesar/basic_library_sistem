@@ -1,5 +1,5 @@
 <?php
-/*
+
 require 'app/controllers/HomePageController.php';
 
 require 'app/controllers/UsersController.php';
@@ -12,7 +12,7 @@ require 'core/Router.php';
 
 require 'core/database/Connection.php';
 
-require 'core/database/QueryBuilder.php';*/
+require 'core/database/QueryBuilder.php';
 
 require 'core/helpers/helpers.php';
 

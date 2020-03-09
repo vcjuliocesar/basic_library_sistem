@@ -1,4 +1,3 @@
-<?php session_start(); ?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -22,3 +21,5 @@
 </head>
 
 <body class="bg-gradient-primary">
+  <!-- Page Wrapper -->
+  <div id="wrapper">

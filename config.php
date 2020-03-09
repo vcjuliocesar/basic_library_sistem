@@ -1,7 +1,7 @@
 <?php
 
 return [
-  'database' => [
+  'database'=>[
 
     'name' => 'library',
 
@@ -12,7 +12,7 @@ return [
     'connection' => 'mysql:host=localhost:3306',
 
     'options' => [
-      PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION
+        PDO::ATTR_ERRMODE=>PDO::ERRMODE_EXCEPTION
+      ]
     ]
-  ]
 ];
