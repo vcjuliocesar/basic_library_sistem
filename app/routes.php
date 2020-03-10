@@ -1,5 +1,6 @@
 <?php
 
+/* @var \App\Core\Router $router */
 $router->get('','HomePageController@home');
 
 $router->get('books','HomePageController@booksList');

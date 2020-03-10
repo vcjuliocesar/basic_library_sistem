@@ -1,94 +1,93 @@
 <?php
 
-class QueryBuilder
-{
+class QueryBuilder {
 
-  protected $pdo;
+    protected $pdo;
 
-  public function __construct($pdo)
-  {
-      $this->pdo = $pdo;
-  }
-
-  public function selectAll($table)
-  {
-    $statement = $this->pdo->prepare("select * from {$table}");
-
-    $statement->execute();
-
-    return $statement->fetchAll(PDO::FETCH_CLASS);
-  }
-
-  public function selectWhere($table,$parameters)
-  {
-    $conditions = [];
-
-    foreach ($parameters as $key => $value) {
-      $conditions[]=$key."=:".$key;
+    public function __construct($pdo)
+    {
+        $this->pdo = $pdo;
     }
-    $sql = sprintf('select * from %s where %s',
+
+    public function selectAll($table)
+    {
+        $statement = $this->pdo->prepare("select * from {$table}");
+
+        $statement->execute();
+
+        return $statement->fetchAll(PDO::FETCH_CLASS);
+    }
+
+    public function selectWhere($table, $parameters)
+    {
+        $conditions = [];
+
+        foreach ($parameters as $key => $value) {
+          $conditions[]=$key."=:".$key;
+        }
+
+        $sql = sprintf('select * from %s where %s',
             $table,
             implode(' and ',$conditions)
           );
-    //dd($sql);
-    $statement = $this->pdo->prepare($sql);
 
-    $statement->execute($parameters);
+        $statement = $this->pdo->prepare($sql);
 
-    return $statement->fetchAll(PDO::FETCH_CLASS);
-  }
+        $statement->execute($parameters);
 
-  public function delete($table,$parameters)
-  {
-    $conditions = [];
-
-    foreach ($parameters as $key => $value) {
-      $conditions[]=$key."=:".$key;
+        return $statement->fetchAll(PDO::FETCH_CLASS);
     }
-    $sql = sprintf('delete from %s where %s',
+
+    public function delete($table, $parameters)
+    {
+        $conditions = [];
+
+        foreach ($parameters as $key => $value) {
+          $conditions[]=$key."=:".$key;
+        }
+
+        $sql = sprintf('delete from %s where %s',
             $table,
             implode(' and ',$conditions)
           );
-    $statement = $this->pdo->prepare($sql);
 
-    $statement->execute($parameters);
+        $statement = $this->pdo->prepare($sql);
 
-    //return $statement->fetchAll(PDO::FETCH_CLASS);
-  }
-
-  public function update($table,$parameters)
-  {
-    $conditions = [];
-
-    foreach ($parameters as $key => $value) {
-      $conditions[]=$key."=:".$key;
+        $statement->execute($parameters);
     }
-    $sql = sprintf('update %s set %s where %s',
-            $table,
-            implode(',',$conditions),
-            $conditions[0],
-          );
-    $statement = $this->pdo->prepare($sql);
 
-    $statement->execute($parameters);
+    public function update($table,$parameters)
+    {
+        $conditions = [];
 
-    //return $statement->fetchAll(PDO::FETCH_CLASS);
-  }
+        foreach ($parameters as $key => $value) {
+          $conditions[]=$key."=:".$key;
+        }
 
-  public function insert($table,$parameters)
-  {
-    $sql = sprintf(
-      'insert into %s (%s) values (%s)',
-      $table,
-      implode(',',array_keys($parameters)),
-      ':' . implode(', :',array_keys($parameters))
-    );
+        $sql = sprintf('update %s set %s where %s',
+                $table,
+                implode(',',$conditions),
+                $conditions[0],
+              );
+        $statement = $this->pdo->prepare($sql);
 
-    try {
-      $statement = $this->pdo->prepare($sql);
-      $statement->execute($parameters);
-    } catch (\Exception $e) {
-      die("Woops, something went wrong". $e->getMessage());
+        $statement->execute($parameters);
     }
-  }
+
+    public function insert($table,$parameters)
+    {
+        $sql = sprintf(
+          'insert into %s (%s) values (%s)',
+          $table,
+          implode(',',array_keys($parameters)),
+          ':' . implode(', :',array_keys($parameters))
+        );
+
+        try {
+            $statement = $this->pdo->prepare($sql);
+            $statement->execute($parameters);
+        } catch (\Exception $e) {
+            die("Woops, something went wrong". $e->getMessage());
+        }
+    }
 }
