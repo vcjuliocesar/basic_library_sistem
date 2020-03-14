@@ -17,6 +17,19 @@ if(!function_exists('redirect')) {
   }
 }
 
+if(!function_exists('is_session_started')) {
+   function is_session_started() {
+     if ( php_sapi_name() !== 'cli' ) {
+        if ( version_compare(phpversion(), '5.4.0', '>=') ) {
+            return session_status() === PHP_SESSION_ACTIVE ? TRUE : FALSE;
+        } else {
+            return session_id() === '' ? FALSE : TRUE;
+        }
+    }
+    return false;
+   }
+}
+
 if(!function_exists('dd')) {
 
   function dd($data) {
@@ -30,6 +43,7 @@ if(!function_exists('dd')) {
 define('DS', DIRECTORY_SEPARATOR);
 define('ROOT', realpath(dirname(__FILE__, 3)).DS);
 define('ASSETS', ROOT."public".DS."assets".DS);
+define('APP',trim(dirname($_SERVER["SCRIPT_NAME"]),"/"));
 if (! function_exists('url_base')) {
     function url_base()
     {

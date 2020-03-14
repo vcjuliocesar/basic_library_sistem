@@ -1,15 +1,26 @@
 <?php
 namespace App\Controllers;
 use App\Core\App;
+use App\Core\Login;
+
 class HomePageController
 {
 
   public function home()
   {
-    if(!isset($_SESSION['name'])){
+    if ( is_session_started() === FALSE ) session_start();
+    if(!isset($_SESSION['user'])){
         return view('login');
     }
-    return view('index');
+    $books = App::get('database')->selectAll('books');
+    return view('index',compact('books'));
+  }
+
+  public function Login()
+  {
+    if(Login::checkLogin($_POST['user'],$_POST['password'])){
+      return redirect(APP);
+    }
   }
 
   public function booksList()

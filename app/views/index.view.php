@@ -28,6 +28,7 @@
                 <th>Categoria</th>
                 <th>Autor</th>
                 <th>Fecha de publicación</th>
+                <th>Cantidad</th>
                 <th>Disponible</th>
                 <th>Accion</th>
               </tr>
@@ -38,6 +39,7 @@
                 <th>Categoria</th>
                 <th>Autor</th>
                 <th>Fecha de publicación</th>
+                <th>Cantidad</th>
                 <th>Disponible</th>
                 <th>Accion</th>
               </tr>
@@ -45,11 +47,12 @@
             <tbody>
               <?php foreach ($books as $key => $value): ?>
                 <tr>
-                  <th><?= $value->titulo; ?></th>
-                  <th><?= $value->categoria;?></th>
-                  <th><?= $value->autor;?></th>
-                  <th><?= $value->fecha_public;?></th>
-                  <th><?= $value->stock;?></th>
+                  <th><?= $value->title; ?></th>
+                  <th><?= $value->category;?></th>
+                  <th><?= $value->author;?></th>
+                  <th><?= $value->publication_at;?></th>
+                  <th><?= $value->quantity;?></th>
+                  <th><?= $value->available;?></th>
                   <th>
                     <a href="/delete?id=<?= $value->id;?>" class="btn btn-danger btn-icon-split" data-id="<?= $value->id;?>">
                       <span class="icon text-white-50">
