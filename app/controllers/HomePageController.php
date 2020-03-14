@@ -12,6 +12,7 @@ class HomePageController
     if(!isset($_SESSION['user'])){
         return view('login');
     }
+
     $books = App::get('database')->selectAll('books');
     return view('index',compact('books'));
   }
@@ -23,16 +24,18 @@ class HomePageController
     }
   }
 
-  public function booksList()
+  public function Logout()
   {
-    $books = App::get('database')->selectAll('books');
-    return view('index',compact('books'));
+    if ( is_session_started() === FALSE ) session_start();
+    Login::Logout();
+    return redirect(APP);
   }
 
   public function booksDetail()
   {
     $books = App::get('database')->selectWhere('books',['id'=>$_GET['id']]);
-    return view('update',compact('books'));
+    dd($books);
+    //return view('update',compact('books'));
   }
 
   public function booksDelete()
