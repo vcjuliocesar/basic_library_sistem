@@ -6,9 +6,6 @@ class Login
     private static $loggedin = false;
     public static $arrUsuario = array();
 
-    private static $user = 'user';
-    private static $password = 'pass';
-
    private function checkSession()
    {
      if(!empty($_SESSION['user']) && !empty($_SESSION['password'])) {
@@ -39,6 +36,6 @@ class Login
      self::$arrUsuario['user'] = array();
      unset($_SESSION['user']);
      unset($_SESSION['password']);
-     self::$loggedin = true;
+     self::$loggedin = false;
    }
 }

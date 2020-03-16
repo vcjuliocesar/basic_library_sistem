@@ -2,9 +2,11 @@
 
 $router->get(APP,'HomePageController@home');
 
-$router->post(APP.'/login','HomePageController@Login');
+$router->get(APP.'/login','LoginController@Login');
 
-$router->get(APP.'/logout','HomePageController@Logout');
+$router->post(APP.'/login','LoginController@signin');
+
+$router->get(APP.'/logout','LoginController@Logout');
 
 $router->get(APP.'/detail','HomePageController@booksDetail');
 
