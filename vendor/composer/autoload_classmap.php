@@ -12,6 +12,7 @@ return array(
     'App\\Core\\Login' => $baseDir . '/core/Login.php',
     'App\\Core\\Request' => $baseDir . '/core/Request.php',
     'App\\Core\\Router' => $baseDir . '/core/Router.php',
+    'App\\Core\\Session' => $baseDir . '/core/Session.php',
     'ComposerAutoloaderInitd9c3d371bd02873485b460001e8ea8a7' => $vendorDir . '/composer/autoload_real.php',
     'Composer\\Autoload\\ClassLoader' => $vendorDir . '/composer/ClassLoader.php',
     'Composer\\Autoload\\ComposerStaticInitd9c3d371bd02873485b460001e8ea8a7' => $vendorDir . '/composer/autoload_static.php',

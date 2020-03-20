@@ -21,14 +21,10 @@ class QueryBuilder
 
   public function selectWhere($table,$parameters)
   {
-    $conditions = [];
 
-    foreach ($parameters as $key => $value) {
-      $conditions[]=$key."=:".$key;
-    }
     $sql = sprintf('select * from %s where %s',
             $table,
-            implode(' and ',$conditions)
+            implode(' and ',$this->renderParameters($parameters))
           );
     //dd($sql);
     $statement = $this->pdo->prepare($sql);
@@ -40,14 +36,10 @@ class QueryBuilder
 
   public function delete($table,$parameters)
   {
-    $conditions = [];
 
-    foreach ($parameters as $key => $value) {
-      $conditions[]=$key."=:".$key;
-    }
     $sql = sprintf('delete from %s where %s',
             $table,
-            implode(' and ',$conditions)
+            implode(' and ',$this->renderParameters($parameters))
           );
     $statement = $this->pdo->prepare($sql);
 
@@ -56,18 +48,14 @@ class QueryBuilder
     //return $statement->fetchAll(PDO::FETCH_CLASS);
   }
 
-  public function update($table,$parameters)
+  public function update($table,$parameters,$criteria)
   {
-    $conditions = [];
-
-    foreach ($parameters as $key => $value) {
-      $conditions[]=$key."=:".$key;
-    }
     $sql = sprintf('update %s set %s where %s',
             $table,
-            implode(',',$conditions),
-            $conditions[0],
+            implode(',',$this->renderParameters($parameters)),
+            implode(',',$this->renderParameters($criteria)),
           );
+
     $statement = $this->pdo->prepare($sql);
 
     $statement->execute($parameters);
@@ -90,5 +78,14 @@ class QueryBuilder
     } catch (\Exception $e) {
       die("Woops, something went wrong". $e->getMessage());
     }
+  }
+
+  private function renderParameters($parameters)
+  {
+    $conditions = [];
+    foreach ($parameters as $key => $value) {
+      $conditions[] = $key."=:".$key;
+    }
+    return $conditions;
   }
 }

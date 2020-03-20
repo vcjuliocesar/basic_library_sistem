@@ -1,7 +1,7 @@
 <?php
 namespace App\Controllers;
 use App\Core\App;
-
+use App\Core\Session;
 
 class HomePageController
 {
@@ -9,7 +9,7 @@ class HomePageController
   public function home()
   {
     if ( is_session_started() === FALSE ) session_start();
-    if(!isset($_SESSION['user'])){
+    if(Session::get('user') == null || Session::getStatus() == 1){
         return redirect(APP.'/login');
     }
 
@@ -20,8 +20,7 @@ class HomePageController
   public function booksDetail()
   {
     $books = App::get('database')->selectWhere('books',['id'=>$_GET['id']]);
-    dd($books);
-    //return view('update',compact('books'));
+    return view('update',compact('books'));
   }
 
   public function booksDelete()
@@ -34,10 +33,31 @@ class HomePageController
   {
     $books = App::get('database')->update('books',
       [
-        'id'=>$_POST['id'],'titulo'=>$_POST['titulo'],'categoria'=>$_POST['categoria'],'autor'=>$_POST['autor']
+        'id'=>$_POST['idbook'],'title'=>$_POST['title'],'category'=>$_POST['category'],'author'=>$_POST['author'],'publication_at'=>$_POST['publication_at']
+      ],
+      [
+        'id'=>$_POST['idbook']
       ]
     );
-    return redirect('books');
+    return redirect(APP);
+  }
+
+  public function booksAdd()
+  {
+    return view('add');
+  }
+
+  public function booksStore()
+  {
+    App::get('database')->insert('books',[
+      'id'=>$_POST['idbook'],
+      'title'=>$_POST['title'],
+      'category'=>$_POST['category'],
+      'author'=>$_POST['author'],
+      'publication_at'=>$_POST['publication_at'],
+      'quantity'=>$_POST['quantity'],
+      'available'=>$_POST['available']
+    ]);
+    return redirect(APP);
   }
 }
-//5579070113328614

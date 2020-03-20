@@ -10,8 +10,12 @@ $router->get(APP.'/logout','LoginController@Logout');
 
 $router->get(APP.'/detail','HomePageController@booksDetail');
 
-/*$router->post('update','HomePageController@booksUpdate');
+$router->post(APP.'/update','HomePageController@booksUpdate');
 
-$router->get('delete','HomePageController@booksDelete');
+$router->get(APP.'/add','HomePageController@booksAdd');
+
+$router->post(APP.'/add','HomePageController@booksStore');
+
+/*$router->get('delete','HomePageController@booksDelete');
 
 $router->post('login','UsersController@index');*/

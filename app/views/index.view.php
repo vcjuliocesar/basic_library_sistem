@@ -6,7 +6,14 @@
     <div id="layoutSidenav_content">
         <main>
           <div class="card mb-4">
-              <div class="card-header"><i class="fas fa-book"></i>Books</div>
+              <div class="card-header"><i class="fas fa-book"></i>Books
+                <a href="add" class="btn btn-success btn-icon-split">
+                  <span class="icon text-white-50">
+                    <i class="fas fa-plus-circle"></i>
+                  </span>
+                  <span class="text">Add</span>
+                </a>
+              </div>
               <div class="card-body">
                   <div class="table-responsive">
                     <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
@@ -59,12 +66,6 @@
                         <?php endforeach; ?>
                       </tbody>
                     </table>
-                    <a href="" class="btn btn-success btn-icon-split">
-                      <span class="icon text-white-50">
-                        <i class="fas fa-plus-circle"></i>
-                      </span>
-                      <span class="text">Add</span>
-                    </a>
                   </div>
                 </div>
               </div>

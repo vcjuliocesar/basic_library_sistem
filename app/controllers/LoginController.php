@@ -4,13 +4,15 @@ namespace App\Controllers;
 
 use App\Core\App;
 use App\Core\Login;
+use App\Core\Session;
 
 class LoginController
 {
   public function Login()
   {
     if ( is_session_started() === FALSE ) session_start();
-    if(isset($_SESSION['user'])){
+    //dd(Session::get('user') !== null);
+    if(Session::get('user') !== null){
         return redirect(APP);
     }
     return view('login');

@@ -1,43 +1,40 @@
 <?php require ('partials/header.php');?>
 
-<?php require ('partials/nav.php');?>
-<?php //dd($books[0]->id); ?>
-<div class="container">
-<!-- Outer Row -->
-<div class="row justify-content-center">
+<body class="sb-nav-fixed">
+  <?php require ('partials/nav.php');?>
+  <?php require ('partials/sidenav.php');?>
+  <div id="layoutSidenav_content">
+        <main>
+          <div class="card mb-4">
+              <div class="card-header"><i class="fas fa-book"></i>Update Books</div>
+                <div class="container">
+                  <div class="row justify-content-center">
+                    <div class="card-body">
+                      <form action="update" method="post">
+                        <input type="hidden" name="idbook" value="<?= $books[0]->id; ?>">
+                        <div class="form-group">
+                          <label class="small mb-1" for="title">Title</label>
+                          <input name="title" class="form-control py-4" id="inputTitle" type="text" value="<?= $books[0]->title; ?>" placeholder="Enter Title" />
+                        </div>
+                        <div class="form-group">
+                          <label class="small mb-1" for="Category">Category</label>
+                          <input name="category" class="form-control py-4" id="inputCategory" type="text" value="<?= $books[0]->category; ?>" placeholder="Enter Category" />
+                        </div>
+                        <div class="form-group">
+                          <label class="small mb-1" for="Author">Author</label>
+                          <input name="author" class="form-control py-4" id="inputAuthor" type="text" value="<?= $books[0]->author;?>" placeholder="Enter Author" />
+                        </div>
+                        <div class="form-group">
+                          <label class="small mb-1" for="Publication_at">Publication at</label>
+                          <input name="publication_at" class="form-control py-4" id="inputCategory" type="text" value="<?= $books[0]->publication_at; ?>" placeholder="Enter Publication at" />
+                        </div>
 
-  <div class="col-xl-10 col-lg-12 col-md-9">
-
-    <div class="card o-hidden border-0 shadow-lg my-5">
-      <div class="card-body p-0">
-        <!-- Nested Row within Card Body -->
-        <div class="row">
-
-          <div class="col-lg-6">
-            <div class="p-5">
-              <div class="text-center">
-                <h1 class="h4 text-gray-900 mb-4">Update</h1>
+                    <button type="submit" class="btn btn-primary">Update</button></div>
+                </form>
               </div>
-              <form class="user" action="/update" method="post">
-                <div class="form-group">
-                  <input type="hidden" name="id" value="<?= $books[0]->id; ?>" class="form-control form-control-user" id="exampleInputEmail" aria-describedby="emailHelp" placeholder="Enter Email Address...">
-                  <input type="text" name="titulo" value="<?= $books[0]->titulo; ?>" class="form-control form-control-user" id="exampleInputEmail" aria-describedby="emailHelp" placeholder="Enter Email Address...">
-                  <input type="text" name="categoria" value="<?= $books[0]->categoria; ?>" class="form-control form-control-user" id="exampleInputEmail" aria-describedby="emailHelp" placeholder="Enter Email Address...">
-                  <input type="text" name="autor" value="<?= $books[0]->autor; ?>" class="form-control form-control-user" id="exampleInputEmail" aria-describedby="emailHelp" placeholder="Enter Email Address...">
-
-                </div>
-                <button type="submit" class="btn btn-primary btn-user btn-block">Save</button>
-              </form>
-
-
-            </div>
           </div>
         </div>
-      </div>
-    </div>
+       </div>
+      </main>
 
-  </div>
-
-</div>
-</div>
 <?php require ('partials/footer.php');?>

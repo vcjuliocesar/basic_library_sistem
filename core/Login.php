@@ -1,6 +1,7 @@
 <?php
 namespace App\Core;
 use App\Core\App;
+use App\Core\Session;
 class Login
 {
     private static $loggedin = false;
@@ -20,10 +21,13 @@ class Login
 
      if($user == $User[0]->email && $pass == $User[0]->password) {
        session_start();
+       //Session::init();
        self::$loggedin = true;
        self::$arrUsuario['user'] = $user;
-       $_SESSION['user'] = $user;
-       $_SESSION['password'] = $pass;
+       Session::add('user',$user);
+       Session::add('password',$pass);
+       //$_SESSION['user'] = $user;
+       //$_SESSION['password'] = $pass;
        return true;
      }
 
@@ -32,10 +36,13 @@ class Login
 
    public static function Logout()
    {
-     session_destroy();
+     Session::close();
+     Session::remove('user');
+     Session::remove('password');
+     //session_destroy();
      self::$arrUsuario['user'] = array();
-     unset($_SESSION['user']);
-     unset($_SESSION['password']);
+     //unset($_SESSION['user']);
+     //unset($_SESSION['password']);*/
      self::$loggedin = false;
    }
 }
